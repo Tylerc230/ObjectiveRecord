@@ -33,6 +33,7 @@
 @property (copy, nonatomic) NSString *modelName;
 
 + (id)instance DEPRECATED_ATTRIBUTE;
++ (void)setSharedManager:(CoreDataManager *)manager;
 + (instancetype)sharedManager;
 
 - (BOOL)saveContext;

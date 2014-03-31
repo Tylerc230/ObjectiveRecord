@@ -30,20 +30,23 @@
 @synthesize modelName = _modelName;
 
 
+static CoreDataManager *singleton;
 + (id)instance {
     return [self sharedManager];
 }
 
 + (instancetype)sharedManager {
-    static CoreDataManager *singleton;
-    static dispatch_once_t singletonToken;
-    dispatch_once(&singletonToken, ^{
-        singleton = [[self alloc] init];
-    });
+    if (singleton == nil) {
+        [self setSharedManager:[CoreDataManager new]];
+    }
     return singleton;
 }
 
 
++ (void)setSharedManager:(CoreDataManager *)manager
+{
+    singleton = manager;
+}
 #pragma mark - Private
 
 - (NSString *)appName {
